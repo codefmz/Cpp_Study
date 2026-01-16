@@ -1,1 +1,0 @@
-g++ -g CMakeFiles/cs.dir/main.cpp.o -o /fmw/code/Cpp_Study/bin/cs   -L/fmw/code/Cpp_Study/lib  -Wl,-rpath,/fmw/code/Cpp_Study/lib -lgtest -Wl,--whole-archive src/class/libclassT.a -Wl,--no-whole-archive -lgtest 
