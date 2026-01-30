@@ -1,6 +1,4 @@
 file(GLOB SRC "./*.cpp")
-
-add_library(libtemplate STATIC ${SRC})
-
-set_target_properties(libtemplate PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+add_library(templateT STATIC ${SRC})
+target_link_libraries(templateT gtest)
+target_include_directories(templateT PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

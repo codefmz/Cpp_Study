@@ -1,6 +1,4 @@
 file(GLOB SRC "./*.cpp")
-
-add_library(libpointer STATIC ${SRC})
-
-set_target_properties(libpointer PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
+add_library(pointerT STATIC ${SRC})
+target_link_libraries(pointerT gtest)
+target_include_directories(pointerT PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})

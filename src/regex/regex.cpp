@@ -5,11 +5,11 @@
 
 using namespace std;
 
-class regexTest : public ::testing::Test {
+class regexT : public ::testing::Test {
 protected:
-    regexTest() {
+    regexT() {
     }
-    ~regexTest() override {
+    ~regexT() override {
     }
     void SetUp() override {
     }
@@ -17,7 +17,7 @@ protected:
     }
 };
 
-TEST_F(regexTest, regexTest1)
+TEST_F(regexT, test1)
 {
     string pattern("[^c]ei");
     pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*";
@@ -29,7 +29,7 @@ TEST_F(regexTest, regexTest1)
     }
 }
 
-TEST_F(regexTest, regexTest2)
+TEST_F(regexT, test2)
 {
     string pattern("[^c]ei");
     pattern = "[[:alpha:]]*" + pattern + "[[:alpha:]]*";
@@ -39,10 +39,7 @@ TEST_F(regexTest, regexTest2)
         cout << it->str() << endl;
     }
 }
-
-#define TEST_PATH R"(E:\Code\Cpp\cppcore\src\regex\test.gcode)"
-
-TEST_F(regexTest, regexTest3)
+TEST_F(regexT, test3)
 {
     string pattern("[^c]ei");
     regex r(pattern);
@@ -50,4 +47,7 @@ TEST_F(regexTest, regexTest3)
     for (sregex_iterator it(file.begin(), file.end(), r), end_it; it != end_it; ++it) {
         cout << it->str() << endl;
     }
+
+
+    std::cout << " regix dir = " << REGEX_SRC_DIR << std::endl;
 }

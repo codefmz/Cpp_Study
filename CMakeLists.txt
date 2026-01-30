@@ -29,13 +29,10 @@ target_link_libraries(cs gtest)
 target_link_libraries(cs
     -Wl,--whole-archive
     classT
+    funcT
+    pointerT
+    regexT
+    templateT
+    threadT
     -Wl,--no-whole-archive
 )
-
-#target
-# add_executable(${target} main.cpp)
-# target_link_libraries(${target} gtest lib${target})
-# target_link_options(${target} PRIVATE "/WHOLEARCHIVE:lib${target}.lib")
-# add_custom_command(TARGET ${target}
-#     COMMAND echo "compile ${target} test finish!!!"
-# )

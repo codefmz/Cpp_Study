@@ -64,37 +64,25 @@ TEST_F(classT, func_class_copy)
 {
     /* 
         1. 先执行移动构造函数。
-        2.  
+        2. 执行两个析构函数
     */
-    Config config;
+    Config config(1, 2);
     testConfig(std::move(config));
 }
 
-auto testLambdaConfig(const Config & config)
+auto testLambdaConfig()
 {
-    return [config]() {
+    Config config(1, 2);
+    return [&config]() { /*  引用拷贝 */
         std::cout << "a: " << config.a << ", b: " << config.b << std::endl;
     };
 }
 
-auto test1() {
-    return testLambdaConfig(Config(1, 2));
-}
-
+/*
+   1. 测试lamd 引用捕获与值捕获效果
+*/
 TEST_F(classT, lambda)
 {
-    auto f = test1();
-    f();
-}
-
-void testQuote(const Config & config)
-{
-    std::cout << "Quote: a: " << config.a << ", b: " << config.b << std::endl;
-}
-
-TEST_F(classT, quote)
-{
-    Config config(1, 3);
-    testQuote(std::move(config));
+    testLambdaConfig()();
 }
 
