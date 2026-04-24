@@ -39,10 +39,11 @@ if [ "$isNew" = "y" ]; then
     rm -rf build
 fi
 
-
+cmake_params=""
 if [ "$debug" = "y" ]; then
-    cmake  -S . -B build -DCMAKE_BUILD_TYPE=Debug
+    cmake_params="-DCMAKE_BUILD_TYPE=Debug"
 else
-    cmake  -S . -B build -DCMAKE_BUILD_TYPE=Debug
+    cmake_params="-DCMAKE_BUILD_TYPE=Release"
 fi
-cmake --build build
+cmake  -S . -B build $cmake_params
+cmake --build build -j$(nproc)

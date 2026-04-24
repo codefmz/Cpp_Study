@@ -1,0 +1,8 @@
+# add_subdirectory(io)
+# add_subdirectory(func)
+# add_subdirectory(stl)
+# add_subdirectory(pointer)
+# add_subdirectory(template)
+# add_subdirectory(regex)
+# add_subdirectory(test)
+add_subdirectory(class)
