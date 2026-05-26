@@ -2,6 +2,9 @@
 #include <string>
 #include <algorithm>
 #include <functional>
+#include <iostream>
+#include <memory>
+#include <vector>
 #include "gtest/gtest.h"
 
 using namespace std;
@@ -75,5 +78,39 @@ void testFunc(int a, int b, char c = 10) {
 }
 
 TEST_F(funcTest, funcTest4) {
-    testFunc(2, 4); //不能使用
+    // testFunc(2, 4); //不能使用
+}
+
+class Animal {
+public:
+    virtual ~Animal() = default;
+
+    void eat() const {
+        cout << "Animal is eating" << endl;
+    }
+    virtual void speak() const {
+        cout << "Animal is speaking" << endl;
+    }
+};
+
+class Dog : public Animal {
+public:
+    void eat() const  {
+        cout << "Dog is eating" << endl;
+    }
+
+    void speak() const override {
+        cout << "Dog: wang wang" << endl;
+    }
+};
+
+TEST_F(funcTest, virtualFuncTest) {
+    Animal *animal1 = new Animal();
+    Animal* animal2 = new Dog();
+
+    animal1->speak();
+    animal1->eat();
+
+    animal2->speak();
+    animal2->eat();
 }
