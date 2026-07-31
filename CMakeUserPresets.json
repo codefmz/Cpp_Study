@@ -1,0 +1,28 @@
+{
+    "version": 2,
+    "configurePresets": [
+        {
+            "name": "default",
+            "inherits": "vcpkg",
+            "environment": {
+                "VCPKG_ROOT": "D:/code/3rd/vcpkg"
+            },
+            "cacheVariables": {
+                "VCPKG_INSTALLED_DIR": "${sourceDir}/build/vcpkg_installed",
+                "VCPKG_MANIFEST_INSTALL": "ON"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "configurePreset": "default"
+        },
+        {
+            "name": "Enter",
+            "description": "",
+            "displayName": "",
+            "configurePreset": "default"
+        }
+    ]
+}

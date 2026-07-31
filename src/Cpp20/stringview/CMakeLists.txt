@@ -1,3 +1,4 @@
 file(GLOB SRC "./*.cpp")
-add_library(stringview OBJECT ${SRC})
-set_property(GLOBAL APPEND PROPERTY MY_MODULE_LIST stringview)
+
+add_executable(stringview ${SRC})
+target_link_libraries(stringview PRIVATE GTest::gtest GTest::gtest_main)

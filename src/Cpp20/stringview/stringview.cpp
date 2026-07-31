@@ -21,7 +21,8 @@ std::string_view extractExtension(std::string_view filename)
     return filename.substr(filename.rfind('.'));
 }
 
-TEST_F(stringview, testType) {
+TEST_F(stringview, testType)
+{
     std::string fileName = "example.txt";
     ASSERT_EQ(extractExtension(fileName), ".txt");
     std::cout << std::format("C++ string Extracted extension: {}", extractExtension(fileName)) << std::endl;

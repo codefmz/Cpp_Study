@@ -1,43 +1,51 @@
-buildType=""
-isNew=""
+#!/usr/bin/env bash
 
-printUsage() {
-    echo "Usage:  [options]"
-    echo "options:"
-    echo "  -n      is new build"
-    echo "  -d      debug or release"
+TOP_DIR=$(cd "$(dirname "$0")"; pwd)
+echo "TOP_DIR=$TOP_DIR"
+
+target=""
+debug=""
+rebuild=""
+
+print_usage() {
+    echo "Usage: sh $(basename "$0") [-t <target>] [-d <debug>] [-r <rebuild>]"
+    echo "eg: sh $(basename "$0") -t "
 }
 
-#--name "$0": 用于在错误时打印出脚本信息
-# -- "$@ 结束标志， 代表传入脚本的 所有参数，保留每个参数的边界
-ARGS=$(getopt -o nd --name "$0" -- "$@")
-if [ $? != 0 ]; then
-    echo "Error: Invalid arguments"
-    printUsage
+# 解析命令行参数
+ARGS=$(getopt -o t:d:r --name "$0" -- "$@")
+if [ $? -ne 0 ]; then
+    echo "Error in command line arguments."
+    print_usage
     exit 1
 fi
 
 eval set -- "$ARGS"
 while true; do
     case "$1" in
-        -n)
-            isNew="y"
-            shift
+        -t)
+            target="$2"
+            shift 2
             ;;
         -d)
-            debug="y"
-            shift
+            debug="$2"
+            shift 2
+            ;;
+        -r)
+            rebuild="y"
+            shift 1
             ;;
         --)
             shift
             break
             ;;
+        *)
+            echo "Invalid command."
+            print_usage
+            exit 1
+            ;;
     esac
 done
-
-if [ "$isNew" = "y" ]; then
-    rm -rf build
-fi
 
 cmake_params=""
 if [ "$debug" = "y" ]; then
@@ -45,5 +53,19 @@ if [ "$debug" = "y" ]; then
 else
     cmake_params="-DCMAKE_BUILD_TYPE=Release"
 fi
-cmake  -S . -B build $cmake_params
-cmake --build build -j$(nproc)
+
+if [ "$target" != "" ]; then
+    cmake_params="$cmake_params -DTARGET=$target"
+fi
+
+if [ "$rebuild" = "y" ]; then
+    rm -rf build
+fi
+
+
+if [ "$rebuild" = "y" ] ; then
+    cmake --preset=default $cmake_params
+fi
+
+echo "compile target = ${target}, debug = ${debug}"
+cmake --build build -- -j$(nproc)

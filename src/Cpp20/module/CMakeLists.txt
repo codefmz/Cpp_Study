@@ -1,3 +1,4 @@
 file(GLOB SRC "./*.cpp")
-add_library(module OBJECT ${SRC})
-set_property(GLOBAL APPEND PROPERTY MY_MODULE_LIST module)
+
+add_executable(module ${SRC})
+target_link_libraries(module PRIVATE GTest::gtest GTest::gtest_main)
