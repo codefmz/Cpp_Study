@@ -105,3 +105,14 @@ public:
 TEST_F(pointerTest, unique_ptr_test) {
     TESTD td;
 }
+
+/* 测试指针与引用的汇编区别 */
+TEST_F(pointerTest, disasPointerAndReference) {
+    int a = 10;
+    int &b = a;
+    int *c = &a;
+
+    b = 20;
+    *c = 30;
+    EXPECT_EQ(a, 30);
+}
